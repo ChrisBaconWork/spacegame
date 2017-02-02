@@ -21,6 +21,7 @@ class Enemy(Entity):
             bullet.success_hit = True
             bullet.destroy()
             self.death(bullet, player)
+            return 1
 
     def death(self, bullet, player):
         self.image.fill((0, 0 ,0))

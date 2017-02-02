@@ -57,6 +57,7 @@ def start(display):
             on_screen_enemies += 1
             for e in [Enemy(enemy_img, display) for i in range(on_screen_enemies)]:
                 enemy_list.append(e)
+            print(enemy_list)
             turn_timer = 0
         for e in enemy_list:
             e.y += 0.5
@@ -65,7 +66,8 @@ def start(display):
             for b in fired_bullets:
                 b.draw(10) # param = rate of change in y-coordinate
                 for e in enemy_list:
-                    e.hit(b, player)
+                    if e.hit(b, player) == 1:
+                        enemy_list.remove(e)
         player.draw()
         score(display, player)
 
