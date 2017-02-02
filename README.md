@@ -8,6 +8,10 @@ This is the canonical spacegame where you shoot things.
 2. Run `pip3 install -r requirements.txt` (you may need root privileges; if so, `sudo pip3 install -r requirements.txt`)
 3. Run `./spacegame.py`
 
+## Controls
+
+WASD to move. Space to fire. 
+
 ## Assets
 
 I shamelessly stole the "assets" from google.
