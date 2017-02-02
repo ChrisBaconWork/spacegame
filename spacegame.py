@@ -57,7 +57,6 @@ def start(display):
             on_screen_enemies += 1
             for e in [Enemy(enemy_img, display) for i in range(on_screen_enemies)]:
                 enemy_list.append(e)
-            print(enemy_list)
             turn_timer = 0
         for e in enemy_list:
             e.y += 0.5
