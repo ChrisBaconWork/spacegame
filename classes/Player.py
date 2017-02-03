@@ -19,11 +19,11 @@ class Player(Entity):
         return b
 
     def hit(self, bullet):
-        if self.health > 1 and bullet.success_hit == False and bullet.y <= self.y and (self.x - 150 <= bullet.x <= self.x + 150):
+        if self.health > 1 and bullet.success_hit == False and bullet.y >= self.y + 100 and (self.x - 10 <= bullet.x <= self.x + 10):
             bullet.success_hit = True
             bullet.destroy()
             self.health -= 1
-        elif self.health <= 1 and bullet.success_hit == False and bullet.y <= self.y and (self.x - 150 <= bullet.x <= self.x + 150):
+        elif self.health <= 1 and bullet.success_hit == False and bullet.y >= self.y and (self.x - 10 <= bullet.x <= self.x + 10):
             if bullet.shooter_type == "Enemy":
                 bullet.success_hit = True
                 bullet.destroy()
