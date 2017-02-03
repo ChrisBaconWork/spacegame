@@ -1,23 +1,28 @@
 import pygame
 
 class Menu(object):
-    def __init__(self):
-        self.button_colour = (68, 22, 34)
+    def __init__(self, display):
+        self.colour = {"unclicked": (68, 22, 34), "clicked": (138, 71, 71)}
+        self.display = display
+        self.fontObj = pygame.font.Font('freesansbold.ttf', 32)
 
-    def draw(self, display):
-        display.fill(self.button_colour, (200, 200, 200, 200))
-        display.fill(self.button_colour, (600, 200, 200, 200))
-        fontObj = pygame.font.Font('freesansbold.ttf', 32)
-        start = fontObj.render('START', True, (255, 255, 255), self.button_colour)
-        quit = fontObj.render('Quit', True, (255, 255, 255), self.button_colour)
+    def start_button(self, clicked="unclicked"):
+        self.display.fill(self.colour[clicked], (200, 200, 200, 200))
+        start = self.fontObj.render('START', True, (255, 255, 255), self.colour[clicked])
         start_rect = start.get_rect()
-        quit_rect = start.get_rect()
-
         start_rect.center = (300, 300)
-        quit_rect.center = (700, 300)
+        self.display.blit(start, start_rect)
 
-        display.blit(start, start_rect)
-        display.blit(quit, quit_rect)
+    def quit_button(self, clicked="unclicked"):
+        self.display.fill(self.colour[clicked], (600, 200, 200, 200))
+        quit = self.fontObj.render('Quit', True, (255, 255, 255), self.colour[clicked])
+        quit_rect = quit.get_rect()
+        quit_rect.center = (700, 300)
+        self.display.blit(quit, quit_rect)
+
+    def draw(self, start="unclicked", quit="unclicked"):
+        self.start_button(start)
+        self.quit_button(quit)
 
     def destroy(self, display):
         display.fill((0, 0, 0), (200, 200, 200, 200))

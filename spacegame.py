@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 import sys
 import pygame
+import time
 from pygame.locals import *
 from classes.Player import *
 from classes.Enemy import *
@@ -9,8 +10,8 @@ from classes.Menu import *
 
 def menu(display):
     """This function creates a menu object, watches for input, and then returns an int based on the input"""
-    m = Menu()
-    m.draw(display)
+    m = Menu(display)
+    m.draw()
     # Update draws Surface object to screen
     pygame.display.update()
     while True:
@@ -20,9 +21,14 @@ def menu(display):
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN and ((200, 200) < pygame.mouse.get_pos() < (400, 400)):
                 m.destroy(display)
+                m.draw("clicked", "unclicked")
+                pygame.display.update()
+                time.sleep(1)
                 return 1
             elif event.type == pygame.MOUSEBUTTONDOWN and ((600, 200) < pygame.mouse.get_pos() < (800, 400)):
                 m.destroy(display)
+                m.draw("unclicked", "clicked")
+                pygame.display.update()
                 return 0
 
 def draw_text(display, player):
