@@ -8,7 +8,6 @@ class Enemy(Entity):
     def __init__(self, path, display):
         super().__init__(display, randrange(800), randrange(200), "Enemy")
         self.ship_img = pygame.image.load(path)
-        self.alive = True
         self.rect = self.ship_img.get_rect()
         self.load_weapons = 100
 
@@ -19,18 +18,17 @@ class Enemy(Entity):
         self.rect.y = self.y
 
     def hit(self, bullet, player):
-        if self.alive == True and bullet.success_hit == False and bullet.y <= self.y + 100 and (self.x - 200 <= bullet.x <= self.x + 200):
+        if bullet.success_hit == False and bullet.y <= self.y + 100 and (self.x - 200 <= bullet.x <= self.x + 200):
             if bullet.shooter_type == "Player":
                 bullet.success_hit = True
                 bullet.destroy()
-                self.death(player)
+                player.score += 1
+                self.death()
                 return 1
 
     def fire(self):
         b = Bullet(self.display, self)
         return b
 
-    def death(self, player):
+    def death(self):
         self.ship_img.fill((0, 0 ,0))
-        player.score += 1
-        self.alive = False

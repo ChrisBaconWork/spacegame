@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 import sys
 import pygame
-import time
 from pygame.locals import *
 from classes.Player import *
 from classes.Enemy import *
@@ -23,7 +22,7 @@ def menu(display):
                 m.destroy(display)
                 m.draw("clicked", "unclicked")
                 pygame.display.update()
-                time.sleep(1)
+                pygame.time.delay(750)
                 return 1
             elif event.type == pygame.MOUSEBUTTONDOWN and ((600, 200) < pygame.mouse.get_pos() < (800, 400)):
                 m.destroy(display)
@@ -88,26 +87,30 @@ def start(display):
             if e.load_weapons < 1:
                 e.load_weapons = 100
                 fired_bullets.append(e.fire())
-                bullet = True
             e.load_weapons -= 1
 
         # If bullet has been fired, draw it and assess whether it hits the target or not
-        if bullet == True:
-            for b in fired_bullets:
-                # param = rate of change in y-coordinate
-                b.draw(10)
-                if player.hit(b) == 1:
+        for b in fired_bullets:
+            # Remove the bullets at the bottom so you don't move into them
+            if b.y > 1080:
+                fired_bullets.remove(b)
+            # draw() param = rate of change in y-coordinate
+            b.draw(10)
+            player_status = player.hit(b)
+            if player_status == "hit":
+                fired_bullets.remove(b)
+            elif player_status == "dead":
+                fired_bullets.remove(b)
+                # End game
+                return True, player
+            for e in enemy_list:
+                if e.hit(b, player) == 1:
                     fired_bullets.remove(b)
-                    # End game
-                    return True, player
-                for e in enemy_list:
-                    if e.hit(b, player) == 1:
-                        fired_bullets.remove(b)
-                        enemy_list.remove(e)
+                    enemy_list.remove(e)
         player.draw()
         draw_text(display, player)
 
-        # Checks what events have been created
+        # Checks what events have been created and takes them off the queue
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 pygame.quit()
@@ -118,7 +121,6 @@ def start(display):
                 player.x += 25
             elif (event.type == KEYDOWN and event.key == K_SPACE):
                 fired_bullets.append(player.fire())
-                bullet = True
 
         turn_timer += 1
         # Draws Surface object to screen

@@ -19,16 +19,17 @@ class Player(Entity):
         return b
 
     def hit(self, bullet):
-        if self.health > 1 and bullet.success_hit == False and bullet.y >= self.y + 100 and (self.x - 10 <= bullet.x <= self.x + 10):
-            bullet.success_hit = True
-            bullet.destroy()
-            self.health -= 1
-        elif self.health <= 1 and bullet.success_hit == False and bullet.y >= self.y and (self.x - 10 <= bullet.x <= self.x + 10):
-            if bullet.shooter_type == "Enemy":
+        if bullet.shooter_type == "Enemy":
+            if self.health > 0 and bullet.success_hit == False and bullet.y >= self.y and ((self.x + 25) <= bullet.x <= (self.x + 25) + 200):
+                bullet.success_hit = True
+                bullet.destroy()
+                self.health -= 1
+                return "hit"
+            elif self.health < 1 and bullet.success_hit == False and bullet.y >= self.y and ((self.x + 25) <= bullet.x <= (self.x + 25) + 200):
                 bullet.success_hit = True
                 bullet.destroy()
                 self.death()
-                return 1
+                return "dead"
 
     def death(self):
         self.player_ship.fill((0, 0 ,0))
