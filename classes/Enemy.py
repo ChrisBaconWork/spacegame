@@ -23,6 +23,10 @@ class Enemy(Entity):
             self.death(bullet, player)
             return 1
 
+    def fire(self):
+        b = Bullet(self, self.display)
+        return b
+
     def death(self, bullet, player):
         self.image.fill((0, 0 ,0))
         player.score += 1

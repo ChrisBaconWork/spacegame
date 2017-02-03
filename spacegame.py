@@ -50,7 +50,7 @@ def start(display):
     FPS = 60
     FPS_CLOCK = pygame.time.Clock()
 
-    ## Game loop
+    # Game loop #
     while True:
         display.fill((0, 0, 0))
         if turn_timer > 250:
