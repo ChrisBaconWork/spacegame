@@ -18,7 +18,7 @@ class Enemy(Entity):
         self.rect.y = self.y
 
     def hit(self, bullet, player):
-        if bullet.success_hit == False and bullet.y <= self.y + 100 and (self.x - 200 <= bullet.x <= self.x + 200):
+        if bullet.success_hit == False and bullet.y <= self.y + 100 and (self.x <= bullet.x <= self.x + 200):
             if bullet.shooter_type == "Player":
                 bullet.success_hit = True
                 bullet.destroy()
