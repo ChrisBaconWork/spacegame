@@ -11,6 +11,7 @@ class Player(Entity):
         self.score = 0
 
     def get_hitbox(self):
+        """This method returns the current hitbox"""
         self.hitbox = [self.y + 10, self.x, self.x + 240]
 
     def draw(self):
