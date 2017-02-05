@@ -10,6 +10,10 @@ class Player(Entity):
         self.health = 3
         self.score = 0
 
+    def get_hitbox(self):
+        # This is horrible, but better than before - hitbox: bullet between [y, x-left, and x-right]
+        self.hitbox = [self.y + 10, self.x, self.x + 240]
+
     def draw(self):
         #blit() draws one surface object onto another - place_to.blit(source, (x-, y-tuple))
         self.display.blit(self.player_ship, (self.x, self.y))
@@ -20,12 +24,13 @@ class Player(Entity):
 
     def hit(self, bullet):
         if bullet.shooter_type == "Enemy":
-            if self.health > 0 and bullet.success_hit == False and bullet.y >= self.y + 10 and ((self.x + 25) <= bullet.x <= (self.x + 25) + 200):
+            self.get_hitbox()
+            if self.health > 0 and bullet.success_hit == False and bullet.y >= self.hitbox[0] and (self.hitbox[1] <= bullet.x <= self.hitbox[2]):
                 bullet.success_hit = True
                 bullet.destroy()
                 self.health -= 1
                 return "hit"
-            elif self.health < 1 and bullet.success_hit == False and bullet.y >= self.y + 10 and ((self.x + 25) <= bullet.x <= (self.x + 25) + 200):
+            elif self.health < 1 and bullet.success_hit == False and bullet.y >= self.hitbox[0] and (self.hitbox[1] <= bullet.x <= self.hitbox[2]):
                 bullet.success_hit = True
                 bullet.destroy()
                 self.death()
