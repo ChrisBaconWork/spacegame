@@ -13,7 +13,7 @@ class Enemy(Entity):
 
     def get_hitbox(self):
         """This method returns the current hitbox"""
-        self.hitbox = [self.y + 100, self.x, self.x + 240]
+        self.hitbox = [self.y + 130, self.x, self.x + 240]
 
     def draw(self):
         #blit() draws one surface object onto another - place_to.blit(source, (x-, y-tuple))

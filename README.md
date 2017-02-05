@@ -10,7 +10,7 @@ This is the canonical spacegame where you shoot things.
 
 ## Controls
 
-WASD to move. Space to fire. 
+A or D to move sidewards. Space to fire. 
 
 ## Assets
 
