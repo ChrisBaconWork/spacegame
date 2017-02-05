@@ -8,6 +8,9 @@ from classes.Bullet import *
 from classes.Menu import *
 
 def menu(display):
+    pygame.mixer.music.load('assets/main_menu.wav')
+    # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
+    pygame.mixer.music.play(-1)
     """This function creates a menu object, watches for input, and then returns an int based on the input"""
     m = Menu(display)
     m.draw()
@@ -62,6 +65,9 @@ def end_game(display, player):
 def start(display):
     """This is the main body of the game logic"""
     # Initialise objects
+    pygame.mixer.music.load('assets/main_game.wav')
+    # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
+    pygame.mixer.music.play(-1)
     player_img = "assets/player_ship.png"
     enemy_img = "assets/ship.png"
     bullet = False
