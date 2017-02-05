@@ -12,7 +12,6 @@ class Enemy(Entity):
         self.load_weapons = 100
 
     def get_hitbox(self):
-        # This is horrible, but better than before - hitbox: bullet between [y, x-left, and x-right]
         self.hitbox = [self.y + 100, self.x, self.x + 240]
 
     def draw(self):
