@@ -3,6 +3,7 @@ from pygame.locals import *
 from classes.Entity import *
 
 class Bullet(Entity):
+    """Bullets are things too"""
     def __init__(self, display, shooter):
         self.shooter_type = shooter.type_entity
         if self.shooter_type == "Player":

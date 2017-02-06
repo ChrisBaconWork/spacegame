@@ -8,6 +8,7 @@ from classes.Bullet import *
 from classes.Menu import *
 
 def menu(display):
+    """This function sets up, displays, and controls the menu"""
     pygame.mixer.music.load('assets/main_menu.wav')
     # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
     pygame.mixer.music.play(-1)
@@ -147,6 +148,7 @@ def start(display):
 
 if __name__ == "__main__":
     def main():
+        """This function ties the game together recursively"""
         display = initialise_game()
         result = menu(display)
         if result == 1:
