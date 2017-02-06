@@ -8,11 +8,10 @@ from classes.Bullet import *
 from classes.Menu import *
 
 def menu(display):
-    """This function sets up, displays, and controls the menu"""
+    """This function creates a menu object, watches for input, and then returns an int based on the input"""
     pygame.mixer.music.load('assets/main_menu.wav')
     # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
     pygame.mixer.music.play(-1)
-    """This function creates a menu object, watches for input, and then returns an int based on the input"""
     m = Menu(display)
     m.draw()
     # Update draws Surface object to screen
