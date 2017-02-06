@@ -10,8 +10,8 @@ This is the canonical spacegame where you shoot things.
 
 ## Controls
 
-A or D to move sidewards. Space to fire. 
+A or D to move sidewards. Space to fire.
 
 ## Assets
 
-I shamelessly stole the "assets" from google.
+I shamelessly stole the "assets" from google. I created the music using an online synthesizer. 
