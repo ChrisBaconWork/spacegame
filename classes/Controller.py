@@ -3,7 +3,7 @@ from pygame.locals import *
 import sys
 
 class Controller(object):
-    """This is the event controller"""
+    """This is the event controller - NOT USED AT THE MOMENT"""
     def __init__(self, display):
         self.display = display
 
