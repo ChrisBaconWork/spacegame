@@ -52,7 +52,7 @@ def initialise_game():
     return pygame.display.set_mode((1080, 1080))
 
 def end_game(display, player):
-    """This function creates the end game screen"""
+    """This function creates the end game screen and controls restart logic"""
     display.fill((0, 0, 0))
 
     fontObj = pygame.font.Font('freesansbold.ttf', 32)
