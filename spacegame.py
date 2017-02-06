@@ -101,7 +101,7 @@ def start(display):
             if b.y > 1080:
                 fired_bullets.remove(b)
             # draw() param = rate of change in y-coordinate
-            b.draw(10)
+            b.draw()
             player_status = player.hit(b)
             if player_status == "hit":
                 fired_bullets.remove(b)

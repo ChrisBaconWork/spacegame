@@ -14,15 +14,16 @@ class Bullet(Entity):
         super().__init__(display, self.bX, self.bY, "Bullet")
         self.y_change = 0
         self.success_hit = False
+        self.colour = {"Player": (0, 255, 0), "Enemy": (255, 0, 0)}
+        self.bullet_speed = {"Player": 10, "Enemy": 7}
 
-    def draw(self, y_rate):
-        # y_rate is the rate of change on the y-axis
-        colour = {"Player": (0, 255, 0), "Enemy": (255, 0, 0)}
+    def draw(self):
+        """Draw the bullet and set the speed, in pixels"""
         if self.shooter_type == "Player":
-            self.y = self.y - y_rate
+            self.y = self.y - self.bullet_speed["Player"]
         elif self.shooter_type == "Enemy":
-            self.y = self.y + y_rate
-        pygame.draw.rect(self.display, colour[self.shooter_type], (self.x, self.y, 10, 40))
+            self.y = self.y + self.bullet_speed["Enemy"]
+        pygame.draw.rect(self.display, self.colour[self.shooter_type], (self.x, self.y, 10, 40))
 
     def destroy(self):
         pygame.draw.rect(self.display, (0, 0, 0), (self.x, self.y, 10, 40))

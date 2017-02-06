@@ -23,6 +23,7 @@ class Player(Entity):
         return b
 
     def hit(self, bullet):
+        """Determine whether the player has been successfully hit"""
         if bullet.shooter_type == "Enemy":
             self.get_hitbox()
             if self.health > 0 and bullet.success_hit == False and bullet.y >= self.hitbox[0] and (self.hitbox[1] <= bullet.x <= self.hitbox[2]):

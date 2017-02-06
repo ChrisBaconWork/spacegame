@@ -22,6 +22,7 @@ class Enemy(Entity):
         self.rect.y = self.y
 
     def hit(self, bullet, player):
+        """Determine whether the enemy has been successfully hit"""
         self.get_hitbox()
         if bullet.success_hit == False and bullet.y <= self.hitbox[0] and (self.hitbox[1] <= bullet.x <= self.hitbox[2]):
             if bullet.shooter_type == "Player":
