@@ -7,7 +7,8 @@ class Menu(object):
         self.fontObj = pygame.font.Font('freesansbold.ttf', 32)
 
     def title(self):
-        start = self.fontObj.render('SPACEGAME', True, (0, 255, 0), (0, 0, 0))
+        self.fontObj = pygame.font.Font('freesansbold.ttf', 42)
+        start = self.fontObj.render('SPACEGAME...', True, (0, 255, 0), (0, 0, 0))
         start_rect = start.get_rect(center = (1080 / 2, 100))
         self.display.blit(start, start_rect)
 
