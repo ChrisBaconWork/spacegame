@@ -6,6 +6,11 @@ class Menu(object):
         self.display = display
         self.fontObj = pygame.font.Font('freesansbold.ttf', 32)
 
+    def title(self):
+        start = self.fontObj.render('SPACEGAME', True, (0, 255, 0), (0, 0, 0))
+        start_rect = start.get_rect(center = (1080 / 2, 100))
+        self.display.blit(start, start_rect)
+
     def start_button(self, clicked="unclicked"):
         self.display.fill(self.colour[clicked], (200, 200, 200, 200))
         start = self.fontObj.render('START', True, (255, 255, 255), self.colour[clicked])
@@ -19,6 +24,7 @@ class Menu(object):
         self.display.blit(quit, quit_rect)
 
     def draw(self, start="unclicked", quit="unclicked"):
+        self.title()
         self.start_button(start)
         self.quit_button(quit)
 
