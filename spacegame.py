@@ -60,7 +60,20 @@ def end_game(display, player):
     text_rect = score_text.get_rect(center = (1080 / 2, 1080 / 2))
     display.blit(score_text, text_rect)
 
+    display.fill((68, 22, 34), ((1080 / 2) - 100, 700, 200, 200))
+    start = fontObj.render('RESTART', True, (255, 255, 255), (68, 22, 34))
+    start_rect = start.get_rect(center = (1080 / 2, 800))
+    display.blit(start, start_rect)
+
     pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN and (((1080 / 2) - 100, 700) < pygame.mouse.get_pos() < ((1080 / 2) + 100, 900)):
+                return 1
 
 def start(display):
     """This is the main body of the game logic"""
@@ -133,17 +146,15 @@ def start(display):
         FPS_CLOCK.tick(FPS)
 
 if __name__ == "__main__":
-    display = initialise_game()
-    result = menu(display)
-    if result == 1:
-        game_over, player = start(display)
-    elif result == 0:
-        pygame.quit()
-        sys.exit()
-    if game_over:
-        while True:
-            end_game(display, player)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                    pygame.quit()
-                    sys.exit()
+    def main():
+        display = initialise_game()
+        result = menu(display)
+        if result == 1:
+            game_over, player = start(display)
+        elif result == 0:
+            pygame.quit()
+            sys.exit()
+        if game_over:
+            if end_game(display, player):
+                main()
+    main()
