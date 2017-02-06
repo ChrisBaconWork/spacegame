@@ -16,7 +16,6 @@ class Enemy(Entity):
         self.hitbox = [self.y + 130, self.x, self.x + 240]
 
     def draw(self):
-        #blit() draws one surface object onto another - place_to.blit(source, (x-, y-tuple))
         self.y += self.speed
         self.display.blit(self.ship_img, (self.x, self.y))
 
