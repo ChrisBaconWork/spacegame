@@ -7,6 +7,10 @@ from classes.Enemy import *
 from classes.Bullet import *
 from classes.Menu import *
 
+def terminate():
+    pygame.quit()
+    sys.exit()
+
 def menu(display):
     """This function creates a menu object, watches for input, and then returns an int based on the input"""
     pygame.mixer.music.load('assets/main_menu.wav')
@@ -18,8 +22,7 @@ def menu(display):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                terminate()
             if event.type == pygame.MOUSEBUTTONDOWN and ((200, 200) < pygame.mouse.get_pos() < (400, 400)):
                 m.destroy(display)
                 m.draw("clicked", "unclicked")
@@ -69,8 +72,7 @@ def end_game(display, player):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                terminate()
             if event.type == pygame.MOUSEBUTTONDOWN and (((1080 / 2) - 100, 700) < pygame.mouse.get_pos() < ((1080 / 2) + 100, 900)):
                 return 1
 
@@ -128,8 +130,7 @@ def start(display):
         # Checks what events have been created and takes them off the queue
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-                pygame.quit()
-                sys.exit()
+                terminate()
             elif (event.type == KEYDOWN and event.key == K_a):
                 player.x -= 25
             elif (event.type == KEYDOWN and event.key == K_d):
@@ -150,8 +151,7 @@ if __name__ == "__main__":
         if result == 1:
             game_over, player = start(display)
         elif result == 0:
-            pygame.quit()
-            sys.exit()
+            terminate()
         if game_over:
             if end_game(display, player):
                 main()
