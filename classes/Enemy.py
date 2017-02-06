@@ -10,6 +10,7 @@ class Enemy(Entity):
         self.ship_img = pygame.image.load(path)
         self.rect = self.ship_img.get_rect()
         self.load_weapons = 100
+        self.speed = 0.5
 
     def get_hitbox(self):
         """This method returns the current hitbox"""
@@ -17,9 +18,8 @@ class Enemy(Entity):
 
     def draw(self):
         #blit() draws one surface object onto another - place_to.blit(source, (x-, y-tuple))
+        self.y += self.speed
         self.display.blit(self.ship_img, (self.x, self.y))
-        self.rect.x = self.x
-        self.rect.y = self.y
 
     def hit(self, bullet, player):
         """Determine whether the enemy has been successfully hit"""

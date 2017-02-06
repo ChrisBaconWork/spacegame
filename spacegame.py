@@ -101,7 +101,6 @@ def start(display):
                 enemy_list.append(e)
             turn_timer = 0
         for e in enemy_list:
-            e.y += 0.5
             e.draw()
             if e.load_weapons < 1:
                 e.load_weapons = 100
