@@ -14,7 +14,6 @@ def menu(display):
     pygame.mixer.music.play(-1)
     m = Menu(display)
     m.draw()
-    # Update draws Surface object to screen
     pygame.display.update()
     while True:
         for event in pygame.event.get():
@@ -139,7 +138,7 @@ def start(display):
                 fired_bullets.append(player.fire())
 
         turn_timer += 1
-        # Draws Surface object to screen
+        # update() draws Surface object to screen
         pygame.display.update()
         FPS_CLOCK.tick(FPS)
 
