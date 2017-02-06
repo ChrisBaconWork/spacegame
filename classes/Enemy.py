@@ -8,7 +8,6 @@ class Enemy(Entity):
     def __init__(self, path, display):
         super().__init__(display, randrange(800), randrange(200), "Enemy")
         self.ship_img = pygame.image.load(path)
-        self.rect = self.ship_img.get_rect()
         self.load_weapons = 100
         self.speed = 0.5
 
