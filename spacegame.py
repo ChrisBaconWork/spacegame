@@ -66,7 +66,6 @@ def start(display):
     """This is the main body of the game logic"""
     # Initialise objects
     pygame.mixer.music.load('assets/main_game.wav')
-    # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
     pygame.mixer.music.play(-1)
     player_img = "assets/player_ship.png"
     enemy_img = "assets/ship.png"
