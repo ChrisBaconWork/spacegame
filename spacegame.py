@@ -81,16 +81,11 @@ def start(display):
     # Initialise objects
     pygame.mixer.music.load('assets/main_game.wav')
     pygame.mixer.music.play(-1)
-    player_img = "assets/player_ship.png"
-    enemy_img = "assets/ship.png"
-    bullet = False
-    fired_bullets = []
-    on_screen_enemies = 1
-    turn_timer = 0
+    player_img, enemy_img, bullet = "assets/player_ship.png",  "assets/ship.png", False
+    fired_bullets, on_screen_enemies, turn_timer = [], 1, 0
     enemy_list = [Enemy(enemy_img, display) for i in range(on_screen_enemies)]
     player = Player(player_img, display)
-    FPS = 60
-    FPS_CLOCK = pygame.time.Clock()
+    FPS, FPS_CLOCK = 60, pygame.time.Clock()
 
     # Game loop
     while True:
