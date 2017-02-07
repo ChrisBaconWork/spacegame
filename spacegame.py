@@ -139,16 +139,17 @@ def start(display):
         pygame.display.update()
         FPS_CLOCK.tick(FPS)
 
-if __name__ == "__main__":
-    def main():
-        """This function ties the game together recursively"""
-        resolution, display = initialise_game()
-        result = menu(display, resolution)
-        if result == 1:
-            game_over, player = start(display)
-        elif result == 0:
-            terminate()
+def main():
+    """This function ties the game together recursively"""
+    resolution, display = initialise_game()
+    result = menu(display, resolution)
+    if result == 1:
+        game_over, player = start(display)
+    elif result == 0:
+        terminate()
         if game_over:
             if end_game(display, resolution, player):
                 main()
+
+if __name__ == "__main__":
     main()
