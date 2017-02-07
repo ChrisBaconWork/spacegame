@@ -147,9 +147,9 @@ def main():
         game_over, player = start(display)
     elif result == 0:
         terminate()
-        if game_over:
-            if end_game(display, resolution, player):
-                main()
+    if game_over:
+        if end_game(display, resolution, player):
+            main()
 
 if __name__ == "__main__":
     main()
