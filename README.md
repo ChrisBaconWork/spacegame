@@ -12,6 +12,8 @@ This is the canonical spacegame where you shoot things.
 
 A or D to move sidewards. Space to fire.
 
+You can change the framerate and resolution by amending `settings.json`.
+
 ## Assets
 
-I shamelessly stole the "assets" from google. I created the music using an online synthesizer. 
+I shamelessly stole the "assets" from google. I created the music using an online synthesizer.
