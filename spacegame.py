@@ -11,12 +11,12 @@ def terminate():
     pygame.quit()
     sys.exit()
 
-def menu(display):
+def menu(display, resolution):
     """This function creates a menu object, watches for input, and then returns an int based on the input"""
     pygame.mixer.music.load('assets/main_menu.wav')
     # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
     pygame.mixer.music.play(-1)
-    m = Menu(display)
+    m = Menu(display, resolution)
     m.draw()
     pygame.display.update()
     while True:
@@ -51,20 +51,21 @@ def initialise_game():
     pygame.init()
     pygame.key.set_repeat(500, 30)
     pygame.display.set_caption("Spacegame")
-    return pygame.display.set_mode((1080, 1080))
+    resolution = {"x": 1080, "y": 1080}
+    return resolution, pygame.display.set_mode((resolution["x"], resolution["y"]))
 
-def end_game(display, player):
+def end_game(display, resolution, player):
     """This function creates the end game screen and controls restart logic"""
     display.fill((0, 0, 0))
 
     fontObj = pygame.font.Font('freesansbold.ttf', 32)
     score_text = fontObj.render('GAME OVER... Your Score: ' + str(player.score), True, (0, 255, 0), (0, 0, 0))
-    text_rect = score_text.get_rect(center = (1080 / 2, 1080 / 2))
+    text_rect = score_text.get_rect(center = (resolution["x"] / 2, resolution["y"] / 2))
     display.blit(score_text, text_rect)
 
     display.fill((68, 22, 34), ((1080 / 2) - 100, 700, 200, 200))
     start = fontObj.render('RESTART', True, (255, 255, 255), (68, 22, 34))
-    start_rect = start.get_rect(center = (1080 / 2, 800))
+    start_rect = start.get_rect(center = (resolution["x"] / 2, 800))
     display.blit(start, start_rect)
 
     pygame.display.update()
@@ -73,7 +74,7 @@ def end_game(display, player):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
-            if event.type == pygame.MOUSEBUTTONDOWN and (((1080 / 2) - 100, 700) < pygame.mouse.get_pos() < ((1080 / 2) + 100, 900)):
+            if event.type == pygame.MOUSEBUTTONDOWN and (((resolution["x"] / 2) - 100, 700) < pygame.mouse.get_pos() < ((1080 / 2) + 100, 900)):
                 return 1
 
 def start(display):
@@ -141,13 +142,13 @@ def start(display):
 if __name__ == "__main__":
     def main():
         """This function ties the game together recursively"""
-        display = initialise_game()
-        result = menu(display)
+        resolution, display = initialise_game()
+        result = menu(display, resolution)
         if result == 1:
             game_over, player = start(display)
         elif result == 0:
             terminate()
         if game_over:
-            if end_game(display, player):
+            if end_game(display, resolution, player):
                 main()
     main()
