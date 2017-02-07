@@ -113,9 +113,16 @@ def start(display, settings):
             b.draw()
             player_status = player.hit(b)
             if player_status == "hit":
-                fired_bullets.remove(b)
+                # Handle edge case where bullet goes off screen but still has causal power
+                try:
+                    fired_bullets.remove(b)
+                except:
+                    pass
             elif player_status == "dead":
-                fired_bullets.remove(b)
+                try:
+                    fired_bullets.remove(b)
+                except:
+                    pass
                 # End game
                 return True, player
             for e in enemy_list:
