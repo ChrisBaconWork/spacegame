@@ -1,16 +1,16 @@
 import pygame
 
 class Menu(object):
-    def __init__(self, display, resolution):
+    def __init__(self, display, settings):
         self.colour = {"unclicked": (68, 22, 34), "clicked": (138, 71, 71)}
         self.display = display
         self.fontObj = pygame.font.Font('freesansbold.ttf', 32)
-        self.resolution = resolution
+        self.resolution = settings.settings["Resolution"]
 
     def title(self):
         self.fontObj = pygame.font.Font('freesansbold.ttf', 42)
         start = self.fontObj.render('SPACEGAME...', True, (0, 255, 0), (0, 0, 0))
-        start_rect = start.get_rect(center = (self.resolution["x"] / 2, 100))
+        start_rect = start.get_rect(center = (self.resolution["X"] / 2, 100))
         self.display.blit(start, start_rect)
 
     def start_button(self, clicked="unclicked"):
