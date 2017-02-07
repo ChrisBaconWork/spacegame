@@ -79,7 +79,7 @@ def end_game(display, settings, player):
             if event.type == pygame.MOUSEBUTTONDOWN and (((settings.settings["Resolution"]["X"] / 2) - 100, 700) < pygame.mouse.get_pos() < ((1080 / 2) + 100, 900)):
                 return 1
 
-def start(display):
+def start(display, settings):
     """This is the main body of the game logic"""
     # Initialise objects
     pygame.mixer.music.load('assets/main_game.wav')
@@ -88,7 +88,7 @@ def start(display):
     fired_bullets, on_screen_enemies, turn_timer = [], 1, 0
     enemy_list = [Enemy(enemy_img, display) for i in range(on_screen_enemies)]
     player = Player(player_img, display)
-    FPS, FPS_CLOCK = 60, pygame.time.Clock()
+    FPS, FPS_CLOCK = settings.settings["Framerate"], pygame.time.Clock()
 
     # Game loop
     while True:
@@ -146,7 +146,7 @@ def main():
     settings, display = initialise_game()
     result = menu(display, settings)
     if result == 1:
-        game_over, player = start(display)
+        game_over, player = start(display, settings)
     elif result == 0:
         terminate()
     if game_over:
