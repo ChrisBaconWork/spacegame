@@ -16,7 +16,7 @@ class Bullet(Entity):
         self.y_change = 0
         self.success_hit = False
         self.bullet_colour = {"Player": (0, 255, 0), "Enemy": (255, 0, 0)}
-        self.bullet_speed = {"Player": 10, "Enemy": 7}
+        self.bullet_speed = {"Player": 10, "Enemy": 5}
 
     def draw(self):
         """Draw the bullet and set the speed, in pixels"""
