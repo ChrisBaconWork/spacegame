@@ -63,6 +63,7 @@ def initialise_game():
     return settings, pygame.display.set_mode((settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"]))
 
 def create_boss(boss_img, display):
+    """Creates a 'boss'-type unit"""
     boss = Enemy(boss_img, display)
     boss.health = 5
     boss.draw()
@@ -151,7 +152,7 @@ def start(display, settings):
         player.draw()
         draw_text(display, player)
 
-        if (player.score % 5 == 0 and player.score != 0) and boss_alive == False:
+        if (player.score % 4 == 0 and player.score != 0) and boss_alive == False:
             new_boss = True
             boss_alive = True
             counter = 100

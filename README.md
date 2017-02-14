@@ -1,6 +1,6 @@
 # Spacegame
 
-This is the canonical spacegame where you shoot things.
+This is the canonical spacegame where you shoot things. There are now "capital ships", which have better armour.
 
 ## How to run
 
