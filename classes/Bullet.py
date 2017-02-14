@@ -3,7 +3,7 @@ from pygame.locals import *
 from classes.Entity import *
 
 class Bullet(Entity):
-    """Bullets are things too"""
+    """Bullets are things too!"""
     def __init__(self, display, shooter):
         self.shooter_type = shooter.type_entity
         if self.shooter_type == "Player":
@@ -12,7 +12,7 @@ class Bullet(Entity):
         elif self.shooter_type == "Enemy":
             self.bX = shooter.x + 110
             self.bY = shooter.y + 160
-        super().__init__(display, self.bX, self.bY, "Bullet")
+        super().__init__(display, self.bX, self.bY, "Bullet", None, None)
         self.y_change = 0
         self.success_hit = False
         self.bullet_colour = {"Player": (0, 255, 0), "Enemy": (255, 0, 0)}

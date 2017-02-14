@@ -6,8 +6,12 @@ from classes.Bullet import *
 
 class Enemy(Entity):
     def __init__(self, path, display):
-        super().__init__(display, randrange(800), randrange(200), "Enemy")
-        self.ship_img = pygame.image.load(path)
+        super().__init__(display,
+                        x = randrange(800),
+                        y = randrange(200),
+                        type_entity = "Enemy",
+                        health = 1,
+                        img = pygame.image.load(path))
         self.load_weapons = 100
         self.speed = 0.5
 
@@ -17,7 +21,7 @@ class Enemy(Entity):
 
     def draw(self):
         self.y += self.speed
-        self.display.blit(self.ship_img, (self.x, self.y))
+        self.display.blit(self.img, (self.x, self.y))
 
     def hit(self, bullet, player):
         """Determine whether the enemy has been successfully hit"""
@@ -26,13 +30,13 @@ class Enemy(Entity):
             if bullet.shooter_type == "Player":
                 bullet.success_hit = True
                 bullet.destroy()
-                player.score += 1
-                self.death()
-                return 1
+                self.health -= 1
+                if self.health < 1:
+                    player.score += 1
+                    self.death()
+                    return "dead"
+                return "hit"
 
     def fire(self):
         b = Bullet(self.display, self)
         return b
-
-    def death(self):
-        self.ship_img.fill((0, 0 ,0))

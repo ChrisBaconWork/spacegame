@@ -15,9 +15,10 @@ def terminate():
 
 def menu(display, settings):
     """This function creates a menu object, watches for input, and then returns an int based on the input"""
-    pygame.mixer.music.load('assets/main_menu.wav')
-    # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
-    pygame.mixer.music.play(-1)
+    if settings.settings["Music"] == "On":
+        pygame.mixer.music.load('assets/main_menu.wav')
+        # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
+        pygame.mixer.music.play(-1)
     m = Menu(display, settings)
     m.draw()
     pygame.display.update()
@@ -51,10 +52,16 @@ def draw_text(display, player):
 def initialise_game():
     """This function initialises the game"""
     pygame.init()
-    pygame.key.set_repeat(500, 30)
+    pygame.key.set_repeat(250, 30)
     pygame.display.set_caption("Spacegame")
     settings = Settings()
     return settings, pygame.display.set_mode((settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"]))
+
+def create_boss(boss_img, display):
+    boss = Enemy(boss_img, display)
+    boss.health = 5
+    boss.draw()
+    return boss
 
 def end_game(display, settings, player):
     """This function creates the end game screen and controls restart logic"""
@@ -82,13 +89,16 @@ def end_game(display, settings, player):
 def start(display, settings):
     """This is the main body of the game logic"""
     # Initialise objects
-    pygame.mixer.music.load('assets/main_game.wav')
-    pygame.mixer.music.play(-1)
-    player_img, enemy_img, bullet = "assets/player_ship.png",  "assets/ship.png", False
-    fired_bullets, on_screen_enemies, turn_timer = [], 1, 0
+    if settings.settings["Music"] == "On":
+        pygame.mixer.music.load('assets/main_game.wav')
+        pygame.mixer.music.play(-1)
+    player_img, enemy_img, capital_ship_img = "assets/player_ship.png",  "assets/alienship.png", "assets/capital_ship.png"
+    bullet, fired_bullets, on_screen_enemies, turn_timer = False, [], 1, 0
     enemy_list = [Enemy(enemy_img, display) for i in range(on_screen_enemies)]
     player = Player(player_img, display)
     FPS, FPS_CLOCK = settings.settings["Framerate"], pygame.time.Clock()
+
+    boss_alive = False
 
     # Game loop
     while True:
@@ -126,11 +136,19 @@ def start(display, settings):
                 # End game
                 return True, player
             for e in enemy_list:
-                if e.hit(b, player) == 1:
+                hit_result = e.hit(b, player)
+                if hit_result == "dead":
                     fired_bullets.remove(b)
                     enemy_list.remove(e)
+                elif hit_result == "hit":
+                    fired_bullets.remove(b)
+
         player.draw()
         draw_text(display, player)
+
+        if player.score > 0 and boss_alive == False:
+            boss_alive = True
+            enemy_list.append(create_boss(capital_ship_img, display))
 
         # Checks what events have been created and takes them off the queue
         for event in pygame.event.get():
