@@ -9,6 +9,9 @@ class Entity(object):
         # x and y co-ordinates
         self.x = x
         self.y = y
+        if self.x > 500:
+            # The world is a torus
+            self.x = 0 + (self.x - 1080)
         self.health = health
         self.img = img
 

@@ -7,7 +7,7 @@ class Player(Entity):
     def __init__(self, path, display):
         super().__init__(display,
                         x = 500,
-                        y = 800,
+                        y = 750,
                         type_entity = "Player",
                         health = 5,
                         img = pygame.image.load(path))
@@ -18,7 +18,12 @@ class Player(Entity):
         self.hitbox = [self.y + 10, self.x, self.x + 240]
 
     def draw(self):
-        #blit() draws one surface object onto another - place_to.blit(source, (x-, y-tuple))
+        """The world is a torus"""
+        if self.x > 1080:
+            self.x = 0 + (self.x - 1080)
+        elif self.x < 0:
+            self.x = 1080 - (0 - self.x)
+            #blit() draws one surface object onto another - place_to.blit(source, (x-, y-tuple))
         self.display.blit(self.img, (self.x, self.y))
 
     def fire(self):

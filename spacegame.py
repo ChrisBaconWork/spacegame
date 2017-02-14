@@ -1,7 +1,5 @@
 #! /usr/bin/env python3
-import sys
-import pygame
-import json
+import sys, pygame, json
 from pygame.locals import *
 from classes.Player import *
 from classes.Enemy import *
@@ -48,6 +46,13 @@ def draw_text(display, player):
     health_text = fontObj.render('Health: ' + str(player.health), True, (0, 255, 0), (0, 0, 0))
     text_rect = health_text.get_rect(center = (1000, 960))
     display.blit(health_text, text_rect)
+
+def draw_boss_text(display, settings):
+    """This function displays the score and player health"""
+    fontObj = pygame.font.Font('freesansbold.ttf', 32)
+    score_text = fontObj.render('CAPITAL SHIP APPROACHING', True, (0, 255, 0), (0, 0, 0))
+    text_rect = score_text.get_rect(center = (settings.settings["Resolution"]["X"] / 2, settings.settings["Resolution"]["Y"] / 2))
+    display.blit(score_text, text_rect)
 
 def initialise_game():
     """This function initialises the game"""
@@ -96,9 +101,9 @@ def start(display, settings):
     bullet, fired_bullets, on_screen_enemies, turn_timer = False, [], 1, 0
     enemy_list = [Enemy(enemy_img, display) for i in range(on_screen_enemies)]
     player = Player(player_img, display)
-    FPS, FPS_CLOCK = settings.settings["Framerate"], pygame.time.Clock()
-
+    FPS = settings.settings["Framerate"]
     boss_alive = False
+    counter = 0
 
     # Game loop
     while True:
@@ -146,9 +151,19 @@ def start(display, settings):
         player.draw()
         draw_text(display, player)
 
-        if player.score > 0 and boss_alive == False:
+        if (player.score % 5 == 0 and player.score != 0) and boss_alive == False:
+            new_boss = True
             boss_alive = True
+            counter = 100
             enemy_list.append(create_boss(capital_ship_img, display))
+
+        if counter > 0 and new_boss == True:
+            draw_boss_text(display, settings)
+            counter -= 1
+        else:
+            counter = 120
+            new_boss = False
+
 
         # Checks what events have been created and takes them off the queue
         for event in pygame.event.get():
@@ -164,7 +179,7 @@ def start(display, settings):
         turn_timer += 1
         # update() draws Surface object to screen
         pygame.display.update()
-        FPS_CLOCK.tick(FPS)
+        pygame.time.Clock().tick(FPS)
 
 def main():
     """This function ties the game together recursively"""
