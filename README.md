@@ -12,7 +12,7 @@ This is the canonical spacegame where you shoot things.
 
 A or D to move sidewards. Space to fire.
 
-You can change the framerate and resolution by amending `settings.json`.
+You can change the framerate, resolution, and music by amending `settings.json`.
 
 ## Assets
 
