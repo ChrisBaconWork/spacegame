@@ -16,4 +16,4 @@ You can change the framerate and resolution by amending `settings.json`.
 
 ## Assets
 
-I shamelessly stole the "assets" from google. I created the music using an online synthesizer.
+The enemy ships were created in Blender. I created the music using an online synthesizer.
