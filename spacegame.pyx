@@ -24,17 +24,20 @@ def menu(display, settings):
             if event.type == pygame.QUIT:
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN and ((200, 200) < pygame.mouse.get_pos() < (400, 400)):
+                # Start
                 m.destroy(display)
                 m.draw("clicked", "unclicked", "unclicked")
                 pygame.display.update()
                 pygame.time.delay(750)
                 return 1
             elif event.type == pygame.MOUSEBUTTONDOWN and ((600, 200) < pygame.mouse.get_pos() < (800, 400)):
+                # Quit
                 m.destroy(display)
                 m.draw("unclicked", "clicked", "unclicked")
                 pygame.display.update()
                 return 0
             elif event.type == pygame.MOUSEBUTTONDOWN and ((400, 600) < pygame.mouse.get_pos() < (600, 800)):
+                # Music toggle
                 m.draw("unclicked", "unclicked", "clicked")
                 pygame.display.update()
                 if settings.settings["Music"] == "On":
