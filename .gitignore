@@ -1,3 +1,6 @@
-*.pyc
 venv/
+build/
 assets/alienshipbig.png
+*.pyc
+*.c
+spacegame.py
