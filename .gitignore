@@ -1,5 +1,6 @@
 venv/
 build/
+__pycache__
 assets/alienshipbig.png
 *.pyc
 *.c
