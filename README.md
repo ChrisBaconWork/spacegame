@@ -7,6 +7,7 @@ This is the canonical spacegame where you shoot things. There are now "capital s
 - Added Music
 - Added configurable settings
 - Added space background
+- Added "Capital" ships, which have more armour
 
 ## How to run
 
