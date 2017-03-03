@@ -123,7 +123,7 @@ def start(display, settings):
     player = Player(player_img, display)
     FPS = settings.settings["Framerate"]
 
-    num_stars = 1000
+    num_stars = 800
     stars = [Stars(settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"]) for i in range(num_stars)]
 
     # Game loop
