@@ -8,6 +8,7 @@ This is the canonical spacegame where you shoot things. There are now "capital s
 - Added configurable settings
 - Added space background
 - Added "Capital" ships, which have more armour
+- Added moving starfield on menu
 
 ## How to run
 
