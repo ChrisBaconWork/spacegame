@@ -136,6 +136,7 @@ def start(display, settings):
             if star.x > settings.settings["Resolution"]["Y"]:
                 stars.remove(star)
         new_height = 1
+        # Add new stars - we want this to be somewhat random
         new_stars = [Stars(settings.settings["Resolution"]["X"], new_height) for i in range(int(random.uniform(0.25, 1.25)))]
         for new_star in new_stars:
             stars.append(new_star)

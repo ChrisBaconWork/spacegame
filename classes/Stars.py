@@ -5,7 +5,7 @@ class Stars:
     def __init__(self, width, height):
         self.x = random.randrange(0, width)
         self.y = random.uniform(0, height)
-        self.size = random.randrange(1, 5)
+        self.size = random.randrange(1, 4)
         self.movement = random.uniform(0.10, 0.25)
 
     def draw(self, display):
