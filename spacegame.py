@@ -7,6 +7,7 @@ from classes.Bullet import *
 from classes.Menu import *
 from classes.Settings import *
 from classes.Stars import *
+from classes.Starfield import *
 
 def terminate():
     pygame.quit()
@@ -19,9 +20,22 @@ def menu(display, settings):
         # params: -1 plays the music indefinitely; 5 plays it once and then loops 5 times = 6 times
         pygame.mixer.music.play(-1)
     m = Menu(display, settings)
-    m.draw()
-    pygame.display.update()
+    centre = (settings.settings["Resolution"]["X"] / 2, settings.settings["Resolution"]["Y"] / 2)
+    stars = [Starfield(settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"]) for i in range(500)]
     while True:
+        display.fill(colour.black)
+        m.draw()
+        for star in stars:
+            if star.x > settings.settings["Resolution"]["X"] or star.x < 0:
+                stars.remove(star)
+                new_star = Starfield(settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"])
+                stars.append(new_star)
+            elif star.y > settings.settings["Resolution"]["Y"] or star.y < 0:
+                stars.remove(star)
+                new_star = Starfield(settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"])
+                stars.append(new_star)
+            star.draw(display, centre)
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
