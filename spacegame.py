@@ -132,7 +132,7 @@ def start(display, settings):
         # Draw stars
         for star in stars:
             star.draw(display)
-            if star.x > settings.settings["Resolution"]["Y"]:
+            if star.y > settings.settings["Resolution"]["Y"]:
                 stars.remove(star)
         new_height = 1
         # Add new stars - we want this to be somewhat random
