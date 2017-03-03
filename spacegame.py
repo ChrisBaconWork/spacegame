@@ -21,7 +21,7 @@ def menu(display, settings):
         pygame.mixer.music.play(-1)
     m = Menu(display, settings)
     centre = (settings.settings["Resolution"]["X"] / 2, settings.settings["Resolution"]["Y"] / 2)
-    stars = [Starfield(settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"]) for i in range(500)]
+    stars = [Starfield(settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"]) for i in range(250)]
     while True:
         display.fill(colour.black)
         m.draw()
