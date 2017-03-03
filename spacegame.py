@@ -1,4 +1,5 @@
-import sys, pygame, json, random
+#!/usr/bin/env python3
+import sys, pygame, json, random, colour
 from pygame.locals import *
 from classes.Player import *
 from classes.Enemy import *
@@ -109,8 +110,6 @@ def end_game(display, settings, player):
 
 def start(display, settings):
     """This is the main body of the game logic"""
-
-    cdef int counter, turn_timer, num_stars
 
     counter = 0
     boss_alive = False
