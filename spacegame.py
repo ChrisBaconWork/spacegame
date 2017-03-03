@@ -55,18 +55,18 @@ def menu(display, settings):
 def draw_text(display, player):
     """This function displays the score and player health"""
     fontObj = pygame.font.Font('freesansbold.ttf', 32)
-    score_text = fontObj.render('Score: ' + str(player.score), True, (0, 255, 0), (0, 0, 0))
+    score_text = fontObj.render('Score: ' + str(player.score), True, colour.green, colour.black)
     text_rect = score_text.get_rect(center = (1000, 1000))
     display.blit(score_text, text_rect)
 
-    health_text = fontObj.render('Health: ' + str(player.health), True, (0, 255, 0), (0, 0, 0))
+    health_text = fontObj.render('Health: ' + str(player.health), True, colour.green, colour.black)
     text_rect = health_text.get_rect(center = (1000, 960))
     display.blit(health_text, text_rect)
 
 def draw_boss_text(display, settings):
     """This function displays the score and player health"""
     fontObj = pygame.font.Font('freesansbold.ttf', 32)
-    score_text = fontObj.render('CAPITAL SHIP APPROACHING', True, (0, 255, 0), (0, 0, 0))
+    score_text = fontObj.render('CAPITAL SHIP APPROACHING', True, colour.green, colour.black)
     text_rect = score_text.get_rect(center = (settings.settings["Resolution"]["X"] / 2, settings.settings["Resolution"]["Y"] / 2))
     display.blit(score_text, text_rect)
 
@@ -87,15 +87,15 @@ def create_boss(boss_img, display):
 
 def end_game(display, settings, player):
     """This function creates the end game screen and controls restart logic"""
-    display.fill((0, 0, 0))
+    display.fill(colour.black)
 
     fontObj = pygame.font.Font('freesansbold.ttf', 32)
-    score_text = fontObj.render('GAME OVER... Your Score: ' + str(player.score), True, (0, 255, 0), (0, 0, 0))
+    score_text = fontObj.render('GAME OVER... Your Score: ' + str(player.score), True, colour.green, colour.black)
     text_rect = score_text.get_rect(center = (settings.settings["Resolution"]["X"] / 2, settings.settings["Resolution"]["Y"] / 2))
     display.blit(score_text, text_rect)
 
     display.fill((68, 22, 34), ((1080 / 2) - 100, 700, 200, 200))
-    start = fontObj.render('RESTART', True, (255, 255, 255), (68, 22, 34))
+    start = fontObj.render('RESTART', True, colour.white, (68, 22, 34))
     start_rect = start.get_rect(center = (settings.settings["Resolution"]["X"] / 2, 800))
     display.blit(start, start_rect)
 
@@ -128,7 +128,7 @@ def start(display, settings):
 
     # Game loop
     while True:
-        display.fill((0, 0, 0))
+        display.fill(colour.black)
         # Draw stars
         for star in stars:
             star.draw(display)
