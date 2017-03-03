@@ -1,10 +1,11 @@
-import sys, pygame, json
+import sys, pygame, json, random
 from pygame.locals import *
 from classes.Player import *
 from classes.Enemy import *
 from classes.Bullet import *
 from classes.Menu import *
 from classes.Settings import *
+from classes.Stars import *
 
 def terminate():
     pygame.quit()
@@ -49,8 +50,6 @@ def menu(display, settings):
                 pygame.time.delay(250)
                 m.draw()
                 pygame.display.update()
-
-
 
 def draw_text(display, player):
     """This function displays the score and player health"""
@@ -111,7 +110,7 @@ def end_game(display, settings, player):
 def start(display, settings):
     """This is the main body of the game logic"""
 
-    cdef int counter, turn_timer
+    cdef int counter, turn_timer, num_stars
 
     counter = 0
     boss_alive = False
@@ -125,9 +124,22 @@ def start(display, settings):
     player = Player(player_img, display)
     FPS = settings.settings["Framerate"]
 
+    num_stars = 1000
+    stars = [Stars(settings.settings["Resolution"]["X"], settings.settings["Resolution"]["Y"]) for i in range(num_stars)]
+
     # Game loop
     while True:
         display.fill((0, 0, 0))
+        # Draw stars
+        for star in stars:
+            star.draw(display)
+            if star.x > settings.settings["Resolution"]["Y"]:
+                stars.remove(star)
+        new_height = 1
+        new_stars = [Stars(settings.settings["Resolution"]["X"], new_height) for i in range(int(random.uniform(0.25, 1.25)))]
+        for new_star in new_stars:
+            stars.append(new_star)
+
         if turn_timer > 500:
             on_screen_enemies += 1
             for e in [Enemy(enemy_img, display) for i in range(on_screen_enemies)]:
@@ -183,7 +195,6 @@ def start(display, settings):
         else:
             counter = 120
             new_boss = False
-
 
         # Checks what events have been created and takes them off the queue
         for event in pygame.event.get():
